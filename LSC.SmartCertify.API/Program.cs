@@ -1,4 +1,7 @@
 
+using LSC.SmartCertify.Application;
+using LSC.SmartCertify.Application.Interfaces.Courses;
+using LSC.SmartCertify.Application.Services;
 using LSC.SmartCertify.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
@@ -22,8 +25,24 @@ namespace LSC.SmartCertify.API
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+            builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+            builder.Services.AddScoped<ICourseService, CourseService>();
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("default", policy =>
+                {
+                    policy.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
 
             var app = builder.Build();
+
+            app.UseCors("default");
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

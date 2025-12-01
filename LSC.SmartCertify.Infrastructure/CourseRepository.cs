@@ -1,11 +1,6 @@
 ﻿using LSC.SmartCertify.Application.Interfaces.Courses;
 using LSC.SmartCertify.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LSC.SmartCertify.Infrastructure
 {
